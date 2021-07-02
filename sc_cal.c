@@ -1,7 +1,7 @@
 #include "mng_window.h"
 
 static DFBColor 	Silver 			= { a: 255, r: 192, g: 192, b: 192 };
-static DFBColor 	graphBoxColor 	= 	{a:255 , r:0, g:0 , b:0 };
+//static DFBColor 	graphBoxColor 	= 	{a:255 , r:0, g:0 , b:0 };
 
 
 static void to_home_page (LiteButton *button, void *ctx)
@@ -26,12 +26,8 @@ int sc_cal(LiteWindow *window)
     LiteImage     		*calculatorTem;
     LiteButton			*btnHome_cal;
 	LiteButton			*btnGraph_cal;
-	LiteButton 			*num7Btn , *clearnum8Btn;
+	LiteButton 			*num7Btn , *num8Btn;
 	LiteTextLine		*txtlineInputCal;
-
-	LiteTextButton 		*txtBtnTest;
-	LiteTextButtonTheme	*txtBtnTheme;
-
 
 
 	box->background 				= &Silver;
@@ -58,7 +54,7 @@ int sc_cal(LiteWindow *window)
 
 	rect.x = 224; rect.y = 87; rect.w = 375; rect.h = 525; 
 	lite_new_image(calculatorBox , &rect , liteDefaultImageTheme , &calculatorTem );
-	lite_load_image(calculatorTem , PATH_BACKGROUND "/calculator_tem2.png");
+	lite_load_image(calculatorTem , PATH_BACKGROUND "/calculator_template.png");
 
 	rect.x = 266;	rect.y = 125;	rect.w = 290;	rect.h = 62;
 	lite_new_textline			( 	calculatorBox , &rect , liteNoTextLineTheme , &txtlineInputCal  );
@@ -71,11 +67,6 @@ int sc_cal(LiteWindow *window)
 	rect.x = 341;	rect.y = 262;	rect.w = 60;	rect.h = 60;
 	lite_new_button 				( calculatorBox , &rect, liteDefaultButtonTheme, &num8Btn);
 	lite_set_button_image  			( num8Btn,	LITE_BS_PRESSED, 	"button/btn_test_press.png");
-	/*
-	lite_new_text_button_theme 		("button/btn_num_cal_press2.png", 	&txtBtnTheme);
-	rect.x = 600;	rect.y = 262;	rect.w = 60;	rect.h = 60;
-	lite_new_text_button			(	calculatorBox , &rect, "7" , txtBtnTheme ,	&txtBtnTest );
-	*/
 
 	// -- set state visible --
 	lite_set_box_visible(box, 0);

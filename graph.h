@@ -1,4 +1,4 @@
-#ifndef WINDOW_MNG
+#ifndef GRAPH
 #define GRAPH
 
 typedef struct _graph

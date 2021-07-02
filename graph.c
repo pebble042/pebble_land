@@ -57,7 +57,7 @@ DFBResult create_axis_graph(LiteBox *box , int axisSize)
 DFBResult create_axis_grid(LiteBox *box )
 {
 	LiteBox *gridGraphBox;
-	lite_new_box					( &gridGraphBox , box , 62 , 50 , 601 , 601 );
+	lite_new_box					( &gridGraphBox , box , 62 + 50 , 50 , 601 , 601 );
 
 	gridGraphBox->Draw = draw_axis_grid;
 

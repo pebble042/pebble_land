@@ -1,14 +1,18 @@
 #include "mng_window.h"
 #include "graph.h"
+#include "cal_graph.h"
 
-#define WIDTH_GRAPH 	724
-#define HEIGHT_GRAPH 	700
+extern Position position_graph(char *mString , char *bString );
+
+
+#define WIDTH_GRAPH_BOX 	824
+#define HEIGHT_GRAPH_BOX 	700
 
 extern DFBResult create_axis_graph( LiteBox *box , int axisSize);	
 extern DFBResult create_axis_grid( LiteBox *box );
 
-static DFBColor 	Silver 			= { a: 255, r: 192, g: 192, b: 192 };
-static DFBColor 	graphBoxColor 	= 	{a:255 , r:250, g:250 , b:250 };
+static DFBColor 	Silver 			= 	{ a: 255, r: 192, g: 192, b: 192 };
+static DFBColor 	graphBoxColor 	= 	{ a:255 , r:250, g:250 , b:250 };
 
 DFBRectangle		rect;
 DFBResult			res;
@@ -18,15 +22,6 @@ LiteTextButton 		*plotTxtBtn;
 LiteTextLine		*txtline_m;
 LiteTextLine		*txtline_b;
 
-
-// static void func_plot_graph_press (LiteTextButton *button, void *ctx){
-// {
-// 	char *bString, *mString;
-
-// 	lite_get_textline_text (	txtline_m, &mString );
-// 	lite_get_textline_text (	txtline_b, &bString );
-// }
-
 static void to_home_page (LiteButton *button, void *ctx){
 
 	changeToPage  	(SC1_HOME);
@@ -35,6 +30,20 @@ static void to_home_page (LiteButton *button, void *ctx){
 static void to_cal_page (LiteButton *button, void *ctx){
 
 	changeToPage  	(SC3_CALCULATOR);
+}
+
+static void func_plot_graph_press (LiteTextButton *button, void *ctx)
+{
+	char *bString, *mString;
+	//position pos ;
+
+	lite_get_textline_text (	txtline_m, &mString );
+	lite_get_textline_text (	txtline_b, &bString );
+
+	//pos = position_graph( mString , bString );
+
+	//printf("p.pxStart[0] : %f p.pxStart[1] : %f\n",pos.pxStart[0] , pos.pxStart[1] );
+
 }
 
 int sc_graph(LiteWindow *window)
@@ -53,8 +62,11 @@ int sc_graph(LiteWindow *window)
 	lite_new_image(box , &rect , liteDefaultImageTheme , &backgroundGraph );
 	lite_load_image(backgroundGraph , PATH_BACKGROUND "/pebbleGraph.png");
 
-	lite_new_box					( &graphBox , box , WIDTH - WIDTH_GRAPH /* 1024-724 = 300 */ , 40 , WIDTH_GRAPH , HEIGHT_GRAPH );  
+	lite_new_box					( &graphBox , box , WIDTH - WIDTH_GRAPH_BOX /* 1024-824 = 200 */ , 40 , WIDTH_GRAPH_BOX , HEIGHT_GRAPH_BOX );  
 	graphBox ->background 			= &graphBoxColor;
+	// position of graphBox (x,y) = (200,40) 40 is size of titlebar
+	// WIDTH is size of window and 
+
 	create_axis_graph				( graphBox , 600 );
 	create_axis_grid				( graphBox );
 
@@ -68,21 +80,18 @@ int sc_graph(LiteWindow *window)
 	lite_set_button_image  			( btnCalculator_graph,	LITE_BS_PRESSED, 	"button/btn_cal_press.png");
 	lite_on_button_press  			( btnCalculator_graph,	to_cal_page, 	(void *)(long)1);
 
-	
-	/*
-	lite_new_box					( &inputBox , box , 200 , 0 , 100 , HEIGHT_GRAPH );  
-	inputBox ->background 			= &graphBoxColor;
+	rect.x = 20;	rect.y = 100;	rect.w = 30;	rect.h = 20;
+	res  =	lite_new_textline		( 	graphBox , &rect , liteNoTextLineTheme , &txtline_m	);
 
-	rect.x = 30;	rect.y = 100;	rect.w = 70;	rect.h = 0;
-	res  =	lite_new_textline		( 	inputBox , &rect , liteNoTextLineTheme , &txtline_m	);
-
-	rect.x = 30;	rect.y = 200;
-	res  =	lite_new_textline		( 	inputBox , &rect , liteNoTextLineTheme , &txtline_b	);
+	rect.x = 20;	rect.y = 200;
+	res  =	lite_new_textline		( 	graphBox , &rect , liteNoTextLineTheme , &txtline_b	);
 	
-	rect.x = 30; rect.y = 300;	rect.w = 50;	rect.h = 30;
-	lite_new_text_button			(	inputBox , &rect , "PLOT" , txtBtnTheme , &plotTxtBtn );
-	//lite_on_text_button_press		(	plotTxtBtn , func_plot_graph_press , NULL );
-	*/
+	rect.x = 20; rect.y = 300;	rect.w = 50;	rect.h = 30;
+	lite_new_text_button			(	graphBox , &rect , "PLOT" , txtBtnTheme , &plotTxtBtn );
+	lite_on_text_button_press		(	plotTxtBtn , func_plot_graph_press , NULL );
+
+
+
 	// -- set state visible --
 	lite_set_box_visible(box, 0);
 	return 0;
