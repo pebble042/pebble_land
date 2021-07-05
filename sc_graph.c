@@ -1,8 +1,8 @@
 #include "mng_window.h"
 #include "graph.h"
-#include "cal_graph.h"
+//#include "cal_graph.h"
 
-extern Position position_graph(char *mString , char *bString );
+//extern Position position_graph(char *mString , char *bString );
 
 
 #define WIDTH_GRAPH_BOX 	824
