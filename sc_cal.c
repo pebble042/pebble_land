@@ -26,7 +26,6 @@ int sc_cal(LiteWindow *window)
     LiteImage     		*backgroundCal;
     LiteButton			*btnHome_cal;
 	LiteButton			*btnGraph_cal;
-	LiteButton 			*num7Btn , *num8Btn;
 
 
 	box->background 				= &Silver;
