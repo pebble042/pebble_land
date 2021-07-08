@@ -1,6 +1,6 @@
 #include "mng_window.h"
 #include "graph.h"
-//#include "cal_graph.h"
+#include "calculate.h"
 
 //extern Position position_graph(char *mString , char *bString );
 
@@ -8,8 +8,8 @@
 #define WIDTH_GRAPH_BOX 	824
 #define HEIGHT_GRAPH_BOX 	700
 
-extern DFBResult create_axis_graph( LiteBox *box , int axisSize);	
-extern DFBResult create_axis_grid( LiteBox *box );
+extern DFBResult create_axis_graph	( LiteBox *box , int axisSize );	
+extern DFBResult create_grid_graph	( LiteBox *box  , int x , int y );
 
 static DFBColor 	Silver 			= 	{ a: 255, r: 192, g: 192, b: 192 };
 static DFBColor 	graphBoxColor 	= 	{ a:255 , r:250, g:250 , b:250 };
@@ -40,10 +40,6 @@ static void func_plot_graph_press (LiteTextButton *button, void *ctx)
 	lite_get_textline_text (	txtline_m, &mString );
 	lite_get_textline_text (	txtline_b, &bString );
 
-	//pos = position_graph( mString , bString );
-
-	//printf("p.pxStart[0] : %f p.pxStart[1] : %f\n",pos.pxStart[0] , pos.pxStart[1] );
-
 }
 
 int sc_graph(LiteWindow *window)
@@ -68,7 +64,7 @@ int sc_graph(LiteWindow *window)
 	// WIDTH is size of window and 
 
 	create_axis_graph				( graphBox , 600 );
-	create_axis_grid				( graphBox );
+	create_grid_graph				( graphBox , 162 ,50 );
 
 	rect.x = 0;	rect.y = 200;	rect.w = 200;	rect.h = 45;
 	lite_new_button 				( box , &rect, liteDefaultButtonTheme, &btnHome_graph);
@@ -80,17 +76,19 @@ int sc_graph(LiteWindow *window)
 	lite_set_button_image  			( btnCalculator_graph,	LITE_BS_PRESSED, 	"button/btn_cal_press.png");
 	lite_on_button_press  			( btnCalculator_graph,	to_cal_page, 	(void *)(long)1);
 
-	rect.x = 20;	rect.y = 100;	rect.w = 30;	rect.h = 20;
+	/* ------------ Textline m and b ------------ */
+	rect.x = 20;	rect.y = 100;	rect.w = 100;	rect.h = 35;
 	res  =	lite_new_textline		( 	graphBox , &rect , liteNoTextLineTheme , &txtline_m	);
 
 	rect.x = 20;	rect.y = 200;
 	res  =	lite_new_textline		( 	graphBox , &rect , liteNoTextLineTheme , &txtline_b	);
 	
+	/* ------------ Button ~Plot~ ------------ */
 	rect.x = 20; rect.y = 300;	rect.w = 50;	rect.h = 30;
 	lite_new_text_button			(	graphBox , &rect , "PLOT" , txtBtnTheme , &plotTxtBtn );
 	lite_on_text_button_press		(	plotTxtBtn , func_plot_graph_press , NULL );
 
-
+	
 
 	// -- set state visible --
 	lite_set_box_visible(box, 0);
