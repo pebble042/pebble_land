@@ -12,7 +12,8 @@ typedef struct _graph
 }Graph;
 
 DFBResult create_axis_graph(LiteBox *box , int axisSize);
-DFBResult create_axis_grid(LiteBox *box );
+DFBResult create_grid_graph( LiteBox *box,int x , int y );
+
 
 
 #endif

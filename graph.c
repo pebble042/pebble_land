@@ -11,16 +11,15 @@
 #define FONT3		"whiterabbit"
 
 Graph 					graph;
-
 static LiteFont			*font8;
 static LiteFont			*font14;
 static IDirectFBFont 	*font_scale_axis;
 static IDirectFBFont 	*font_axis;
 
-//static DFBColor 		graphBoxColor 	= 	{a:255 , r:250, g:250 , b:250 };
+//static DFBColor 		graphBoxColor 	= 	{a:255 , r:0, g:250 , b:250 };
 
 static DFBResult draw_axis_graph (LiteBox *box, const DFBRegion *region, DFBBoolean clear);
-static DFBResult draw_axis_grid (LiteBox *box, const DFBRegion *region, DFBBoolean clear);
+static DFBResult draw_grid_graph (LiteBox *box, const DFBRegion *region, DFBBoolean clear);
 
 static void func_setting(LiteBox *box , int axisSize)
 {
@@ -37,6 +36,9 @@ static void func_setting(LiteBox *box , int axisSize)
 	graph.ORIGIN_X		= 	graph.width / 2;
 	graph.ORIGIN_Y		= 	graph.height / 2;
 
+	printf("graph.ORIGIN_X : %d\n", graph.ORIGIN_X );
+	printf("graph.ORIGIN_Y : %d\n", graph.ORIGIN_Y );
+
 }
 
 DFBResult create_axis_graph(LiteBox *box , int axisSize)
@@ -45,27 +47,27 @@ DFBResult create_axis_graph(LiteBox *box , int axisSize)
 	LiteBox *axisGraphBox;
 
 	func_setting		( bx , axisSize);
-	lite_new_box		( &axisGraphBox , bx , bx->rect.x , bx->rect.y , graph.width , graph.height );
+	lite_new_box		( &axisGraphBox , bx , 50 , 0 , graph.width , graph.height );
 	
 	//bx->background 		= &graphBoxColor; // Test color box
-	bx->Draw			= draw_axis_graph;
+	axisGraphBox->Draw			= draw_axis_graph;
 
 
 	return DFB_OK;
 }
 
-DFBResult create_axis_grid(LiteBox *box )
+DFBResult create_grid_graph( LiteBox *box,int x , int y )
 {
 	LiteBox *gridGraphBox;
-	lite_new_box					( &gridGraphBox , box , 62 + 50 , 50 , 601 , 601 );
+	lite_new_box					( &gridGraphBox , box , x/*62 + 100*/ , y /*50 */, 600 + 1 , 600 + 1);
 
-	gridGraphBox->Draw = draw_axis_grid;
+	gridGraphBox->Draw = draw_grid_graph;
 
 	return DFB_OK;
 }
 
 
-static DFBResult draw_axis_grid (LiteBox *box, const DFBRegion *region, DFBBoolean clear)
+static DFBResult draw_grid_graph (LiteBox *box, const DFBRegion *region, DFBBoolean clear)
 {
 
 	IDirectFBSurface *surface = box->surface;
