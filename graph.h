@@ -13,7 +13,6 @@ typedef struct _graph
 
 DFBResult create_axis_graph(LiteBox *box , int axisSize);
 DFBResult create_grid_graph( LiteBox *box,int x , int y );
-
-
+DFBResult plot_linear_graph(LiteBox *box , char *mString , char *bString );
 
 #endif

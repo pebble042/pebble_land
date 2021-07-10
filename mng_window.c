@@ -17,7 +17,7 @@ static
 void createCmp()
 {
 	/* create theme */
-	lite_new_text_button_theme ("./button/theme_btn.png", &txtBtnTheme);
+	lite_new_text_button_theme ("./button/btn_img.png", &txtBtnTheme);
 
 	/* create box */
 	for(int i = 0; i < 3; i++) {
@@ -51,14 +51,7 @@ int createWindow ( int argc,char *argv[])
 	rect.w 		= 		WIDTH;
 	rect.h 		= 		HEIGHT;
 
-	lite_new_window		(		
-							NULL,
-							&rect,
-							DWCAPS_ALPHACHANNEL,
-							liteNoWindowTheme,
-							NULL,
-                            &window 
-                        );
+	lite_new_window		(	NULL , &rect , DWCAPS_ALPHACHANNEL , liteNoWindowTheme , NULL , &window  );
 	lite_set_window_background  (window, &black);					/* Set Background Window */
 	lite_set_window_opacity  	(window, liteFullWindowOpacity);  	/* show the window */
 
