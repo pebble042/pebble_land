@@ -22,24 +22,30 @@ static void button_cal_press (LiteButton *button, void *ctx)
 	int	lenStrShow = (int)strlen(strShow);
 	
 
-	if(idx == 67)
+	if(idx == 67) // 67 is C
 	{
-		 memset( strShow , 0 , lenStrShow );
+		memset( strShow , 0 , lenStrShow );
 		lite_set_textline_text(txtlineInputCal,strShow);
 	}
-	else if(idx == 61) 
+	else if(idx == 61) // 61 is =
 	{
 		lite_get_textline_text ( txtlineInputCal , &textTextline);
-		printf(textTextline);
-		printf("\nSolution Cal\n");
+		strcpy(strShow , textTextline);
+		// printf("strShow : %s\n", strShow);
+		// printf("lenght strShow : %d\n", (int)strlen(strShow));
+
+		// printf(textTextline);
+		// printf("\nSolution Cal\n");
 	}
 	else
 	{	
 		char charValue = idx;
 		strShow[lenStrShow] = charValue;
 		lite_set_textline_text(txtlineInputCal,strShow);
-
 	}
+
+	//printf("strShow : %s\n", strShow);
+
 
 }
 	
@@ -62,7 +68,6 @@ int obj_cal(LiteBox *box)
 	{
 		for(int j = 0 ; j<4;j++)
 		{
-			
 			lite_new_button 		( bx, &rect , liteDefaultButtonTheme , &btnCal[i][j]	);
 			lite_set_button_image  	( btnCal[i][j],	LITE_BS_PRESSED, 	"button/btn_test_press.png");
 

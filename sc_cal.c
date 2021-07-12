@@ -45,9 +45,6 @@ int sc_cal(LiteWindow *window)
 	lite_on_button_press  			( btnGraph_cal,	to_graph_page, 	(void *)(long)1);
 	/*------- End Menu --------*/
 	
-
-
-
 	// box for Calculator
 	rect.x = 200;	rect.y = 40;	rect.w = 824;	rect.h = 700;
 	lite_new_box					( &calculatorPageBox , box , rect.x , rect.y , rect.w , rect.h );  

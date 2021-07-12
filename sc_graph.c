@@ -81,14 +81,14 @@ int sc_graph(LiteWindow *window)
 	lite_on_button_press  			( btnCalculator_graph,	to_cal_page, 	(void *)(long)1);
 
 	/* ------------ Textline m and b ------------ */
-	rect.x = 20;	rect.y = 100;	rect.w = 100;	rect.h = 35;
+	rect.x = 50;	rect.y = 100;	rect.w = 50;	rect.h = 35;
 	res  =	lite_new_textline		( 	graphBox , &rect , liteNoTextLineTheme , &txtline_m	);
 
-	rect.x = 20;	rect.y = 200;
+	rect.y = 200;
 	res  =	lite_new_textline		( 	graphBox , &rect , liteNoTextLineTheme , &txtline_b	);
 	
 	/* ------------ Button ~Plot~ ------------ */
-	rect.x = 20; rect.y = 300;	rect.w = 50;	rect.h = 30;
+	rect.y = 300;	rect.w = 50;	rect.h = 30;
 	lite_new_text_button			(	graphBox , &rect , "PLOT" , txtBtnTheme , &plotTxtBtn );
 	lite_on_text_button_press		(	plotTxtBtn , func_plot_graph_press , NULL );
 
