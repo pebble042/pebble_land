@@ -81,13 +81,10 @@ DFBResult create_grid_graph( LiteBox *box,int x , int y )
 
 DFBResult plot_linear_graph(LiteBox *box , char *mString , char *bString )
 {
+	
 	valueGraph = find_point_coordinates (mString , bString );
-	printf("rect x : %d\n", box->rect.x);
-	//box->rect.x += 50;
 
 	box->Draw = draw_plot_linear_graph;
-
-
 	//box->background = &graphBoxColor;
 	lite_update_box( box , NULL);
 	return DFB_OK;
@@ -256,10 +253,10 @@ static DFBResult draw_plot_linear_graph(LiteBox *box , const DFBRegion *region ,
 	surface->DrawLine 				(surface, valueGraph.pxStart[0],valueGraph.pxStart[1], valueGraph.pxFinal[0], valueGraph.pxFinal[1] );
 	surface->DrawLine 				(surface, valueGraph.pxStart[0]-1,valueGraph.pxStart[1], valueGraph.pxFinal[0]-1, valueGraph.pxFinal[1] );
 
-	printf("pxStart[0] : %f\n", valueGraph.pxStart[0]);
-	printf("pxStart[1] : %f\n", valueGraph.pxStart[1]);
-	printf("pxFinal[0] : %f\n", valueGraph.pxFinal[0]);
-	printf("pxFinal[1] : %f\n", valueGraph.pxFinal[1]);
+	// printf("pxStart[0] : %f\n", valueGraph.pxStart[0]);
+	// printf("pxStart[1] : %f\n", valueGraph.pxStart[1]);
+	// printf("pxFinal[0] : %f\n", valueGraph.pxFinal[0]);
+	// printf("pxFinal[1] : %f\n", valueGraph.pxFinal[1]);
 	return DFB_OK;
 }
 

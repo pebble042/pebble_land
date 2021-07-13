@@ -1,4 +1,6 @@
 #include "mng_window.h"
+#include "calculate.h"
+
 
 	DFBRectangle		rect;
 	
@@ -6,12 +8,12 @@
 	LiteTextLine		*txtlineInputCal;
 	LiteButton 			*btnCal[4][4];
 
-int 		num[4][4] = {	// 48 - 57 = 0 - 9
-							{55,56,57,67}, 	//67 = C
-							{52,53,54,42}, 	//42 = X
-							{49,50,51,45}, 	//45 = -
-							{48,61,47,43} 	//61 = '=' ,47 = '/' , 43 = '+'
-	 					};
+int num[4][4] = {	// 48 - 57 = 0 - 9
+					{55,56,57,67}, 	//67 = C
+					{52,53,54,42}, 	//42 = X
+					{49,50,51,45}, 	//45 = -
+					{48,61,47,43} 	//61 = '=' ,47 = '/' , 43 = '+'
+	 			};
 
 char *textTextline;
 char strShow[] = "";
@@ -26,16 +28,15 @@ static void button_cal_press (LiteButton *button, void *ctx)
 	{
 		memset( strShow , 0 , lenStrShow );
 		lite_set_textline_text(txtlineInputCal,strShow);
+
 	}
 	else if(idx == 61) // 61 is =
 	{
 		lite_get_textline_text ( txtlineInputCal , &textTextline);
 		strcpy(strShow , textTextline);
-		// printf("strShow : %s\n", strShow);
-		// printf("lenght strShow : %d\n", (int)strlen(strShow));
+		//calculator_function( strShow , &newString );
 
-		// printf(textTextline);
-		// printf("\nSolution Cal\n");
+
 	}
 	else
 	{	
@@ -43,9 +44,6 @@ static void button_cal_press (LiteButton *button, void *ctx)
 		strShow[lenStrShow] = charValue;
 		lite_set_textline_text(txtlineInputCal,strShow);
 	}
-
-	//printf("strShow : %s\n", strShow);
-
 
 }
 	
