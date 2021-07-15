@@ -10,5 +10,9 @@ typedef struct _Calculate
 }Calculate;
 
 Calculate find_point_coordinates (char mString[] , char bString[] );
+float calculator_function(char strNum[10]);
+
+
+
 
 #endif

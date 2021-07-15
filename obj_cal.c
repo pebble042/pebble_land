@@ -32,10 +32,19 @@ static void button_cal_press (LiteButton *button, void *ctx)
 	}
 	else if(idx == 61) // 61 is =
 	{
+		char resultStr[8];
+		float result;
 		lite_get_textline_text ( txtlineInputCal , &textTextline);
 		strcpy(strShow , textTextline);
-		//calculator_function( strShow , &newString );
 
+		/* Calculation function */
+		result = calculator_function(strShow);
+		snprintf( resultStr , 10 ,"%.04f", result);
+
+		memset( strShow , 0 , lenStrShow );
+		lite_set_textline_text(txtlineInputCal,resultStr);
+
+		strcpy(strShow , resultStr);
 
 	}
 	else
@@ -58,7 +67,7 @@ int obj_cal(LiteBox *box)
 
 	/* box for receive Input*/
 	rect.x = 42;	rect.y = 38;	rect.w = 290;	rect.h = 62;
-	lite_new_textline			( 	bx , &rect , liteNoTextLineTheme , &txtlineInputCal  );
+	lite_new_textline			( bx , &rect , liteNoTextLineTheme , &txtlineInputCal  );
 	
 	/* Button cal*/
 	rect.x = 37; rect.y = 175; rect.w = 60; rect.h = 60;
@@ -69,7 +78,7 @@ int obj_cal(LiteBox *box)
 			lite_new_button 		( bx, &rect , liteDefaultButtonTheme , &btnCal[i][j]	);
 			lite_set_button_image  	( btnCal[i][j],	LITE_BS_PRESSED, 	"button/btn_test_press.png");
 
-			lite_on_button_press 	(btnCal[i][j],button_cal_press,(void*)(long)num[i][j]);
+			lite_on_button_press 	( btnCal[i][j],button_cal_press,(void*)(long)num[i][j] );
 			rect.x += 80;
 		}
 		rect.x = 37;
