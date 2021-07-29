@@ -23,6 +23,8 @@ typedef enum {
 	SC1_HOME = 0,		// screen Home page
 	SC2_GRAPH,			// screen Graph page
 	SC3_CALCULATOR,		// screen Calculator page
+	SC4_TEMP_GRAPH,		// screen Temperator graph page
+	SC5_OTHER,			// screen Other page
 
 	SC_MAX
 } window_page;

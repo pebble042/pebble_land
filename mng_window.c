@@ -5,12 +5,14 @@ LiteTextButtonTheme		*txtBtnTheme;
 
 DFBColor 				black 			= { a: 255, r: 0, g: 0, b: 0};
 
-LiteBox				*bx[3];
+LiteBox				*bx[5];
 int 				currPage 	= 	-1;
 
 extern int home_mng(LiteWindow *window);
 extern int sc_graph(LiteWindow *window);
 extern int sc_cal(LiteWindow *window);
+extern int sc_tempGraph(LiteWindow *window);
+extern int sc_other(LiteWindow *window);
 
 
 static
@@ -20,7 +22,7 @@ void createCmp()
 	lite_new_text_button_theme ("./button/btn_img.png", &txtBtnTheme);
 
 	/* create box */
-	for(int i = 0; i < 3; i++) {
+	for(int i = 0; i < 5; i++) {
 		if(bx[i]) lite_destroy_box(bx[i]); // check if bx is not empty , destroy the bx first
 		
 			lite_new_box  		(&bx[i], LITE_BOX(window), 0, 0, WIDTH, HEIGHT);
@@ -30,6 +32,8 @@ void createCmp()
 	home_mng(window);
 	sc_cal(window);
 	sc_graph(window);
+	sc_tempGraph(window);
+	sc_other(window);
 
 
 	// set first screen
