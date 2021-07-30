@@ -16,6 +16,18 @@ static void to_graph_page (LiteButton *button, void *ctx)
 	changeToPage  	(SC2_GRAPH);
 }
 
+static void to_temp_graph_page (LiteButton *button, void *ctx)
+{
+	
+	changeToPage  	(SC4_TEMP_GRAPH);
+}
+
+static void to_other_page (LiteButton *button, void *ctx)
+{
+	
+	changeToPage  	(SC5_OTHER);
+}
+
 int sc_cal(LiteWindow *window)
 {
 	//LiteTextButton 		*txtBtnHome;
@@ -26,6 +38,8 @@ int sc_cal(LiteWindow *window)
     LiteImage     		*backgroundCal;
     LiteButton			*btnHome_cal;
 	LiteButton			*btnGraph_cal;
+	LiteButton			*btnTempGraph_cal;
+	LiteButton			*btnOther_cal;
 
 
 	box->background 				= &Silver;
@@ -43,6 +57,17 @@ int sc_cal(LiteWindow *window)
 	lite_new_button 				( box , &rect, liteDefaultButtonTheme, &btnGraph_cal);
 	lite_set_button_image  			( btnGraph_cal,	LITE_BS_PRESSED, 	"button/btn_graph_press.png");
 	lite_on_button_press  			( btnGraph_cal,	to_graph_page, 	(void *)(long)1);
+	
+	rect.x = 0;	rect.y = 335;	rect.w = 200;	rect.h = 45;
+	lite_new_button 				( box , &rect, liteDefaultButtonTheme, &btnTempGraph_cal);
+	lite_set_button_image  			( btnTempGraph_cal,	LITE_BS_PRESSED, 	"button/btn_temp_graph_press.png");
+	lite_on_button_press  			( btnTempGraph_cal,	to_temp_graph_page, 	(void *)(long)1);
+
+	rect.x = 0;	rect.y = 380;	rect.w = 200;	rect.h = 45;
+	lite_new_button 				( box , &rect, liteDefaultButtonTheme, &btnOther_cal);
+	lite_set_button_image  			( btnOther_cal,	LITE_BS_PRESSED, 	"button/btn_other_press.png");
+	lite_on_button_press  			( btnOther_cal,	to_other_page, 	(void *)(long)1);
+
 	/*------- End Menu --------*/
 	
 	// box for Calculator
