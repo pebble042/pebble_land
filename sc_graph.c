@@ -25,26 +25,11 @@ LiteBox 			*plotGraphBox ;
 
 
 
-static void to_home_page (LiteButton *button, void *ctx){
-
-	changeToPage  	(SC1_HOME);
-}
-
-static void to_cal_page (LiteButton *button, void *ctx){
-
-	changeToPage  	(SC3_CALCULATOR);
-}
-
-static void to_temp_graph_page (LiteButton *button, void *ctx)
+static void change_page (LiteButton *button, void *ctx)
 {
-	
-	changeToPage  	(SC4_TEMP_GRAPH);
-}
-
-static void to_other_page (LiteButton *button, void *ctx)
-{
-	
-	changeToPage  	(SC5_OTHER);
+	int id_page = (int)(long)ctx;
+	changeToPage  	(id_page);
+			
 }
 
 static void func_plot_graph_press (LiteTextButton *button, void *ctx)
@@ -77,22 +62,22 @@ int sc_graph(LiteWindow *window)
 	rect.x = 0;	rect.y = 200;	rect.w = 200;	rect.h = 45;
 	lite_new_button 			( box , &rect , liteDefaultButtonTheme , &btnHome_graph);
 	lite_set_button_image  		( btnHome_graph ,	LITE_BS_PRESSED , "button/btn_home_press.png" );
-	lite_on_button_press  		( btnHome_graph ,	to_home_page, 	(void *)(long)1);
+	lite_on_button_press  		( btnHome_graph ,	change_page, 	(void *)(long)SC1_HOME);
 
 	rect.x = 0;	rect.y = 290;	rect.w = 200;	rect.h = 45;
 	lite_new_button 			( box , &rect , liteDefaultButtonTheme , &btnCalculator_graph );
 	lite_set_button_image  		( btnCalculator_graph ,	LITE_BS_PRESSED , "button/btn_cal_press.png" );
-	lite_on_button_press  		( btnCalculator_graph ,	to_cal_page , 	(void *)(long)1 );
+	lite_on_button_press  		( btnCalculator_graph ,	change_page , 	(void *)(long)SC3_CALCULATOR);
 
 	rect.x = 0;	rect.y = 335;	rect.w = 200;	rect.h = 45;
 	lite_new_button 			( box , &rect , liteDefaultButtonTheme , &btnTempGraph_graph);
 	lite_set_button_image  		( btnTempGraph_graph ,	LITE_BS_PRESSED , "button/btn_temp_graph_press.png" );
-	lite_on_button_press  		( btnTempGraph_graph ,	to_temp_graph_page, 	(void *)(long)1);
+	lite_on_button_press  		( btnTempGraph_graph ,	change_page, 	(void *)(long)SC4_TEMP_GRAPH);
 
 	rect.x = 0;	rect.y = 380;	rect.w = 200;	rect.h = 45;
 	lite_new_button 			( box , &rect , liteDefaultButtonTheme , &btnOther_graph );
 	lite_set_button_image  		( btnOther_graph ,	LITE_BS_PRESSED , "button/btn_other_press.png" );
-	lite_on_button_press  		( btnOther_graph ,	to_other_page , 	(void *)(long)1 );
+	lite_on_button_press  		( btnOther_graph ,	change_page , 	(void *)(long)SC5_OTHER );
 
 	/* ------------ graphBox Main Box ------------ */
 	lite_new_box				( &graphBox , box , WIDTH - WIDTH_GRAPH_BOX /* 1024-824 = 200 */ , 40 , WIDTH_GRAPH_BOX , HEIGHT_GRAPH_BOX );  
